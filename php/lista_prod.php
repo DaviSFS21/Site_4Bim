@@ -40,7 +40,7 @@
 					    $vetor_prod = mysqli_fetch_array($resultado_prod);
                         echo"
                             <div class='card' style='width: 18rem;'>
-                            <img class='card-img-top' src='../$vetor_prod[4]' alt='Imagem de capa do card'>
+                            <img class='card-img-top' src='$vetor_prod[4]' alt='Imagem de capa do card'>
                             <div class='card-body'>
                             <h5 class='card-title'>$vetor_prod[1]</h5>
                             <p class='card-text'>$vetor_prod[2]</p>
