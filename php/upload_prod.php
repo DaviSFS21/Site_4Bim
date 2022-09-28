@@ -14,35 +14,53 @@
 
     if($numero_retorno == 0)
     {
-        if(isset($_FILES['imagem_prod'])){
-            $imagem_prod = $_FILES['imagem_prod'];
+        if(isset($_FILES['img_prod'])){
+            /* Declaração da variável da imagem */
+            $img_prod = $_FILES['img_prod'];
 
-            if($imagem_prod['error']){
-                die();
+            /* Declaração do novo caminho da imagem e criação do uniqid() para mudar o local da imagem, do local temporário ao source do servidor */
+            $pasta = "../assets/imagens_prod/";
+            $novoNomeImg = uniqid();
+            $extensaoImg = strtolower(pathinfo($img_prod['name'], PATHINFO_EXTENSION));
+    
+            /* Condições caso o upload sofra um erro, caso a extensão seja a errada, ou, caso a imagem seja muito pesada */
+            if($img_prod['error']){
+    
                 ?>
                 <script>
                     alert("Falha ao enviar o arquivo...");
                     javascript:history.back();
                 </script>
                 <?php
-            }
-            if(arquivo['size'] > 4194304){
                 die();
+            }
+    
+            if($extensaoImg != 'jpg' && $extensaoImg != 'png'){
+                ?>
+                <script>
+                    alert("Extensão não permitida...(Somente .jpg ou .png)");
+                    javascript:history.back();
+                </script>
+                <?php
+                die();
+            }
+    
+            if($img_prod['size'] > 4194304){
                 ?>
                 <script>
                     alert("Arquivo maior que 4MB...");
                     javascript:history.back();
                 </script>
                 <?php
+                die();
             }
 
-            $pasta = "arquivos/";
-            $nomeImg = $imagem_prod['name'];
-            $novoNomeImg = uniqid();
-            $extensaoImg = strtolower(pathinfo($nomeImg, PATHINFO_EXTENSION));
+            /* Movendo a imagem e apresentando-a na tela */
+            $novoPath = $pasta . $novoNomeImg . "." . $extensaoImg;
+            move_uploaded_file($img_prod['tmp_name'], $novoPath);
         }
-
-        $sql_cadastrar = "INSERT INTO `produto`(`nome_prod`,`desc_prod`,`marca`,`img_prod`) VALUES ('$nome_prod','$desc_prod','$marca','$imagem_prod')";
+        $sql_cadastrar = "INSERT INTO `produto`(`nome_prod`,`desc_prod`,`marca`,`path_img`) 
+        VALUES ('$nome_prod','$desc_prod','$marca','$novoPath')";
         mysqli_query($conexao, $sql_cadastrar);
         ?>
             <script>
@@ -58,4 +76,5 @@
             </script>
         <?php
     }     
+    mysqli_close($conexao);
 ?>
