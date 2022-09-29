@@ -19,16 +19,11 @@
         if($numero_retorno == 0){
             /* Declaração da variável da imagem e apresentação dos detalhes do arquivo */
             $img_prod = $_FILES['img_prod'];
-            echo "Arquivo enviado!";
-            echo "<br><br>" . $img_prod['name'];
-            echo "<br><br>" . $img_prod['size'] . " Bytes";
-            echo "<br><br>" . $img_prod['tmp_name'];
 
             /* Declaração do novo caminho da imagem e criação do uniqid() para mudar o local da imagem, do local temporário ao source do servidor */
             $pasta = "../assets/imagens_prod/";
             $novoNomeImg = uniqid();
             $extensaoImg = strtolower(pathinfo($img_prod['name'], PATHINFO_EXTENSION));
-            echo "<br><br>" . $extensaoImg;
 
             /* Condições caso o upload sofra um erro, caso a extensão seja a errada, ou, caso a imagem seja muito pesada */
             if($img_prod['error']){
@@ -62,10 +57,7 @@
                 die();
             }
 
-            $novoPath = $pasta . $novoNomeImg . "." . $extensaoImg;
-
-            echo "<br><br>" . $novoPath;
-    
+            $novoPath = $pasta . $novoNomeImg . "." . $extensaoImg;    
             move_uploaded_file($img_prod['tmp_name'], $novoPath);
     
             /* Movendo a imagem e apresentando-a na tela */
