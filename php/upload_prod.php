@@ -84,5 +84,5 @@
             </script>
         <?php
     }
-    
+    mysqli_close($conexao);
 ?>
