@@ -1,5 +1,3 @@
-
-
 <?php
     /* Condição para só executar o código quando o formulário for enviado */
     if(isset($_FILES['img_prod'])){

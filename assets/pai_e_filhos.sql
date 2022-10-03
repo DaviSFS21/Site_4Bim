@@ -32,7 +32,7 @@ CREATE TABLE `produto` (
   `nome_prod` varchar(120) NOT NULL,
   `desc_prod` varchar(450) NOT NULL,
   `marca` varchar(20) NOT NULL,
-  `img_prod` blob NOT NULL
+  `path_img` varchar(120) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------

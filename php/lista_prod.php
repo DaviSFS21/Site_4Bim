@@ -11,7 +11,7 @@
 <body>
     <h1>Lista de Produtos</h1>
     <ul class="nav__links">
-        <li><a href="form_cad_prod.html">Cadastrar</a></li>
+        <li><a href="../form_cad_prod.html">Cadastrar</a></li>
         <li><a href="form_alt_prod.php">Alterar</a></li>
         <li><a href="form_exc_prod.php">Excluir</a></li>
         <li><a href="form_pesq_prod.html">Pesquisar</a></li>
