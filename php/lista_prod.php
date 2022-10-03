@@ -43,11 +43,11 @@
             }
             else
             {
+                //Gerando um vetor com as categorias
+                $vetor_prod = mysqli_fetch_array($resultado_prod);
+
                 //Existe categorias cadastradas!
-                for($i = 0  ; $i < $numero_resultado; $i++)
-                {
-                    //Gerando um vetor com as categorias
-                    $vetor_prod = mysqli_fetch_array($resultado_prod);
+                for($i = 0  ; $i < $numero_resultado; $i++){
                     echo"
                         <div class='card' style='width: 18rem;'>
                             <img class='card-img-top' src='$vetor_prod[4]' alt='Imagem de capa do card'>

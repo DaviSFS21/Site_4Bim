@@ -4,9 +4,27 @@
         $email = $_POST;
         $senha = $_POST['c_senha'];
         $cripto = sha1($senha);
-        echo $cripto;
 
-        
+        require("connect.php");
+
+        //Gerando a SQL de PESQUISA das categorias existentes no BD
+        $pesquisar_prod = "SELECT * FROM `usuario`";
+
+        //Executando a SQL e armazenando o resultado em uma variavel
+        $resultado_user = mysqli_query($conexao, $pesquisar_user);
+
+        //Obtendo o numero de linhas retornadas na pesquisa
+        $numero_resultado = mysqli_num_rows($resultado_user);
+
+        $vetor_user = mysqli_fetch_array($resultado_user);
+
+        for($i = 0  ; $i < $numero_resultado; $i++){
+            if($vetor_user[1] = 0){
+                if($email = $vetor_user[2]){
+                    $_SESSION = "zim";
+                }
+            }
+        }
     }
 ?>
 <!DOCTYPE html>
@@ -17,7 +35,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css" media="screen">
     <link rel="stylesheet" type="text/css" href="../css/style_login.css" media="screen">
-    <title>Login do Admin</title>
+    <title>Login - Pai & Filhos</title>
 </head>
 <body>
     <form action="" method="POST">
