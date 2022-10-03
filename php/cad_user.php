@@ -1,8 +1,11 @@
 <?php
-    $email = $_POST;
-    $senha = $_POST("c_senha");
-    $cripto = sha1($senha);
-    echo $cripto;
+
+    if(isset($_POST['c_email'])){
+        $email = $_POST;
+        $senha = $_POST['c_senha'];
+        $cripto = sha1($senha);
+        echo $cripto;
+    }
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -19,8 +22,12 @@
         <div class="container">
             <ul class="nav nav-pills nav-justified mb-3" id="ex1" role="tablist">
                 <li class="nav-item" role="presentation">
-                <a class="nav-link active" id="tab-login" data-mdb-toggle="pill" href="#pills-login" role="tab"
-                    aria-controls="pills-login" aria-selected="true">Login</a>
+                    <a class="nav-link" id="tab-login" data-mdb-toggle="pill" href="login.php" role="tab"
+                    aria-controls="pills-login" aria-selected="false">Login</a>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <a class="nav-link active" id="tab-register" data-mdb-toggle="pill" href="cad_user.php" role="tab"
+                    aria-controls="pills-register" aria-selected="true">Cadastrar</a>
                 </li>
             </ul>
             <div class="tab-content">
