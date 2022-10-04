@@ -14,17 +14,33 @@
                 <li><a href="../form_cad_prod.html">Cadastrar</a></li>
                 <li><a href="form_alt_prod.php">Alterar</a></li>
                 <li><a href="lista_prod.php">Visualizar</a></li>
-                <li><a href="php/form_exc_prod.php">Excluir</a></li>
-                <li><a class="cta" href="html/index.html">Início</a></li>
+                <li><a href="form_exc_prod.php">Excluir</a></li>
+                <li><a class="cta" href="../index.html">Início</a></li>
+                <li><a class="cta" href="exit.php">Sair</a></li>
             </ul>
         </nav>
     </header>
     <?php
         //Iniciando ou mantendo a session
         session_start();
-
-        //mostrando o valor da session
-        echo "Você está logado ".$_SESSION["nome"];    
+        
+        if(isset($_SESSION["nome"])){
+            if($_SESSION["verif_admin"] = 0){
+                ?>
+                    <script>
+                        window.location.replace("index.html");
+                    </script>
+                <?php
+            }
+            //mostrando o valor da session
+            echo "Você está logado ".$_SESSION["nome"];    
+        }else{
+            ?>
+                <script>
+                    window.location.replace("login.php");
+                </script>
+            <?php
+        }
     ?>
 </body>
 </html>

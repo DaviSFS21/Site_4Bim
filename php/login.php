@@ -22,6 +22,7 @@
 
                 $_SESSION['nome'] = $vetor_user[3];
                 $_SESSION['senha'] = $vetor_user[4];
+                $_SESSION['verif_admin'] = $vetor_user[1];
 
                 ?>
                     <script>
