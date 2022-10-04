@@ -1,9 +1,50 @@
 <?php
 
-    if(isset($_POST['c_email'])){
-        $email = $_POST;
-        $senha = $_POST['c_senha'];
+    if(isset($_POST['n_email'])){
+        $email = $_POST['n_email'];
+        $cpf = $_POST['n_cpf'];
+        $nome = $_POST['n_nome'];
+        $senha = $_POST['n_senha'];
+        $tel = $_POST['n_tel'];
         $cripto = sha1($senha);
+
+        //Conectando com o banco para fazer a consulta do usuario
+        require('connect.php');
+        
+        //SQL de pesquisa de usuario e senha
+        $sql_pesquisa = "select * from `usuario` where `email` = '$email'";
+        $resultado_usuario = mysqli_query($conexao,$sql_pesquisa);
+        
+        //tranformando em numero o resultado da pesquisa
+        $numero_resultado = mysqli_num_rows($resultado_usuario);
+
+        if($numero_resultado == 0){
+            $vetor_user = mysqli_fetch_array($resultado_usuario);            
+            if($email != $vetor_user[2]){
+                session_start();
+
+                $_SESSION['nome'] = $vetor_user[3];
+                $_SESSION['senha'] = $vetor_user[4];
+                $_SESSION['verif_admin'] = $vetor_user[1];
+
+                ?>
+                    <script>
+                        alert("Login com sucesso!");
+                        window.location.replace("acesso_restrito.php");
+                    </script>
+                <?php
+            }
+
+            $sql_cadastrar = "INSERT INTO `usuario`(`cpf`, `email`, `nome`, `senha`, `tel`) VALUES ('$cpf','$email','$nome','$cripto','$tel')";
+        }else{
+        ?>
+            <script>
+                alert("Falhou fi");
+                window.location.replace("cad_user.php");
+            </script>
+        <?php
+        }
+        mysqli_close($conexao);
     }
 ?>
 <!DOCTYPE html>
@@ -33,20 +74,44 @@
                 <p class="text-center">Insira o usuário do administrador:</p>
 
                 <div class="form-outline mb-4">
-                    <label class="form-label" for="loginName">Email do Admin</label>
-                    <input type="email" id="loginName" class="form-control" name="c_email"/>
+                    <label class="form-label" for="loginName">Email</label>
+                    <input type="email" id="loginName" class="form-control" name="n_email"/>
+                </div>
+                <div class="form-outline mb-4">
+                    <label class="form-label" for="loginPassword">Nome</label>
+                    <input type="text" id="loginPassword" class="form-control" name="n_nome"/>
+                </div>
+                <div class="form-outline mb-4">
+                    <label class="form-label" for="loginPassword">CPF</label>
+                    <input type="text" id="loginPassword" class="form-control" name="n_cpf"/>
                 </div>
                 <div class="form-outline mb-4">
                     <label class="form-label" for="loginPassword">Senha</label>
-                    <input type="password" id="loginPassword" class="form-control" name="c_senha"/>
+                    <input type="password" class="form-control" name="n_senha"/>
                 </div>
-                <div class="row mb-4 justify-content-center">
-                    <a href="#!">Esqueceu a senha?</a>
-                </div>
+                <div class="form-outline mb-4">
+                    <label class="form-label" for="loginPassword">Repita a senha</label>
+                    <input type="password" class="form-control" name="n_rep_senha"/>
                 </div>
                 <button type="submit" class="btn btn-primary btn-block mb-4">Continuar</button>
             </div>
         </div>
     </form>
+
+    <script>
+        var password = document.getElementById("n_senha")
+        , confirm_password = document.getElementById("n_rep_senha");
+
+        function validatePassword(){
+        if(password.value != confirm_password.value) {
+            confirm_password.setCustomValidity("Senhas diferentes!");
+        } else {
+            confirm_password.setCustomValidity('');
+        }
+        }
+
+        password.onchange = validatePassword;
+        confirm_password.onkeyup = validatePassword;
+    </script>
 </body>
 </html>
