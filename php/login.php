@@ -1,37 +1,51 @@
 <?php
 
     if(isset($_POST['c_email'])){
-        $email = $_POST;
+        $email = $_POST['c_email'];
         $senha = $_POST['c_senha'];
         $cripto = sha1($senha);
 
-        require("connect.php");
+        //Conectando com o banco para fazer a consulta do usuario
+        require('connect.php');
+        
+        //SQL de pesquisa de usuario e senha
+        $sql_pesquisa = "select * from `usuario` where `email` = '$email' AND `senha` = '$cripto'";
+        $resultado_usuario = mysqli_query($conexao,$sql_pesquisa);
+        
+        //tranformando em numero o resultado da pesquisa
+        $numero_resultado = mysqli_num_rows($resultado_usuario);
 
-        //Gerando a SQL de PESQUISA das categorias existentes no BD
-        $pesquisar_prod = "SELECT * FROM `usuario`";
+        if($numero_resultado == 1){
+            $vetor_user = mysqli_fetch_array($resultado_usuario);            
+            if($email = $vetor_user[2]){
+                session_start();
 
-        //Executando a SQL e armazenando o resultado em uma variavel
-        $resultado_user = mysqli_query($conexao, $pesquisar_user);
+                $_SESSION['nome'] = $vetor_user[3];
+                $_SESSION['senha'] = $vetor_user[4];
 
-        //Obtendo o numero de linhas retornadas na pesquisa
-        $numero_resultado = mysqli_num_rows($resultado_user);
-
-        $vetor_user = mysqli_fetch_array($resultado_user);
-
-        for($i = 0  ; $i < $numero_resultado; $i++){
-            if($vetor_user[1] = 0){
-                if($email = $vetor_user[2]){
-                    $_SESSION = "zim";
-                }
+                ?>
+                    <script>
+                        alert("Login com sucesso!");
+                        window.location.replace("acesso_restrito.php");
+                    </script>
+                <?php
             }
+        }else{
+        ?>
+            <script>
+                alert("Falhou fi");
+                window.location.replace("login.php");
+            </script>
+        <?php
         }
+        mysqli_close($conexao);
     }
 ?>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta http-equiv="X-UA-Compatible" content="opera-gx">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css" media="screen">
     <link rel="stylesheet" type="text/css" href="../css/style_login.css" media="screen">

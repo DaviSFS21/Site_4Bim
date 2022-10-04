@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.1.1
+-- version 5.2.0
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 20-Set-2022 às 23:23
--- Versão do servidor: 10.4.22-MariaDB
--- versão do PHP: 8.1.1
+-- Tempo de geração: 04-Out-2022 às 03:07
+-- Versão do servidor: 10.4.24-MariaDB
+-- versão do PHP: 8.1.6
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -35,6 +35,17 @@ CREATE TABLE `produto` (
   `path_img` varchar(120) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Extraindo dados da tabela `produto`
+--
+
+INSERT INTO `produto` (`cod_prod`, `nome_prod`, `desc_prod`, `marca`, `path_img`) VALUES
+(63, 'Caneta azul com fuzil', 'Manoel Gomi segurando um fuzil 7.62mm', '22333', '../assets/imagens_prod/633b3e959cfe2.jpg'),
+(64, 'Mercedes AMG Project One', 'Dirigindo uma Mercedes no Forza Horizon 5', 'Forza Horizon 5', '../assets/imagens_prod/633b3eb946ef6.png'),
+(65, 'Kirby e Heisenberg', 'Um fabricante de alucinógenos e um fruto de uma alucinação.', 'Crossplay maluco', '../assets/imagens_prod/633b404879175.jpg'),
+(66, 'Calendário', 'Calendário de 2019', 'Sim', '../assets/imagens_prod/633b4f77a891d.jpg'),
+(67, 'Victory Royale', 'Na companhia do soldado Matheus, ganhamos uma partida duo no Fortnite.', 'Fortnite', '../assets/imagens_prod/633b86689bb5a.png');
+
 -- --------------------------------------------------------
 
 --
@@ -43,11 +54,19 @@ CREATE TABLE `produto` (
 
 CREATE TABLE `usuario` (
   `cpf` int(11) NOT NULL,
-  `nome` varchar(60) NOT NULL,
+  `admin` tinyint(1) NOT NULL,
   `email` varchar(60) NOT NULL,
+  `nome` varchar(60) NOT NULL,
   `senha` varchar(100) NOT NULL,
   `tel` int(14) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Extraindo dados da tabela `usuario`
+--
+
+INSERT INTO `usuario` (`cpf`, `admin`, `email`, `nome`, `senha`, `tel`) VALUES
+(21, 1, 'davi21@email.com', 'Davi Soares', '24a33963e322e89d7dbc4ad6011769adbcfe43a7', 129);
 
 --
 -- Índices para tabelas despejadas
@@ -73,7 +92,7 @@ ALTER TABLE `usuario`
 -- AUTO_INCREMENT de tabela `produto`
 --
 ALTER TABLE `produto`
-  MODIFY `cod_prod` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `cod_prod` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=68;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

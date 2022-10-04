@@ -15,7 +15,7 @@
         $numero_retorno = mysqli_num_rows($resultado_prod);
 
         if($numero_retorno == 0){
-            /* Declaração da variável da imagem e apresentação dos detalhes do arquivo */
+            /* Declaração da variável da imagem */
             $img_prod = $_FILES['img_prod'];
 
             /* Declaração do novo caminho da imagem e criação do uniqid() para mudar o local da imagem, do local temporário ao source do servidor */

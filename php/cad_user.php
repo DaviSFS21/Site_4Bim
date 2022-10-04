@@ -4,7 +4,6 @@
         $email = $_POST;
         $senha = $_POST['c_senha'];
         $cripto = sha1($senha);
-        echo $cripto;
     }
 ?>
 <!DOCTYPE html>
@@ -15,7 +14,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css" media="screen">
     <link rel="stylesheet" type="text/css" href="../css/style_login.css" media="screen">
-    <title>Login do Admin</title>
+    <title>Cadastro do Admin</title>
 </head>
 <body>
     <form action="" method="POST">
