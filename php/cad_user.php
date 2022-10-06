@@ -1,5 +1,5 @@
 <?php
-
+    //Caso existam dados nas caixas de texto, executar o código
     if(isset($_POST['n_email'])){
         $email = $_POST['n_email'];
         $cpf = $_POST['n_cpf'];
@@ -11,17 +11,25 @@
         //Conectando com o banco para fazer a consulta do usuario
         require('connect.php');
         
-        //SQL de pesquisa de usuario e senha
-        $sql_pesquisa = "select * from `usuario` where `email` = '$email'";
-        $resultado_usuario = mysqli_query($conexao,$sql_pesquisa);
+        //SQL de pesquisa de email
+        $sql_pesq_email = "select * from `usuario` where `email` = '$email'";
+        $result_email = mysqli_query($conexao,$sql_pesq_email);
         
         //tranformando em numero o resultado da pesquisa
-        $numero_resultado = mysqli_num_rows($resultado_usuario);
+        $verif_email = mysqli_num_rows($result_email);
 
-        if($numero_resultado == 0){
+        //SQL de pesquisa de CPF
+        $sql_pesq_cpf = "select * from `usuario` where `cpf` = '$cpf'";
+        $result_cpf = mysqli_query($conexao,$sql_pesq_cpf);
+        
+        //tranformando em numero o resultado da pesquisa
+        $verif_cpf = mysqli_num_rows($result_cpf);
 
+        //Se não houver dados iguais, realizar o cadastro
+        if($verif_email == 0 && $verif_cpf == 0){
+
+            //Iniciando a session com os dados inseridos
             session_start();
-
             $_SESSION['nome'] = $nome;
             $_SESSION['email'] = $email;
 
@@ -32,17 +40,25 @@
                 </script>
             <?php
 
+            //Comando e função de execução para o insert do usuário no BD
             $sql_cadastrar = "INSERT INTO `usuario`(`cpf`, `email`, `nome`, `senha`, `tel`) 
             VALUES ('$cpf','$email','$nome','$cripto','$tel')";
 
             mysqli_query($conexao, $sql_cadastrar);
-        }else{
-        ?>
-            <script>
-                alert("Falhou fi");
-                window.location.replace("cad_user.php");
-            </script>
-        <?php
+        }
+        //Caso já existam registros inseridos, criar condicionais para mostrar o que foi repetido
+        else{
+            if($verif_cpf == 1) $valor_rep = "CPF já cadastrado...";
+            if($verif_email == 1){
+                if ($valor_rep) $valor_rep = "CPF e ";
+                $valor_rep = $valor_rep . "Email já cadastrado...";
+            }
+            ?>
+                <script>
+                    alert("<?php echo $valor_rep; ?>");
+                    window.location.replace("cad_user.php");
+                </script>
+            <?php
         }
         mysqli_close($conexao);
     }
@@ -75,29 +91,29 @@
 
                 <div class="form-outline mb-4">
                     <label class="form-label" for="loginName">Email</label>
-                    <input type="email" id="loginName" class="form-control" name="n_email"/>
+                    <input type="text" id="loginName" class="form-control" name="n_email" required>
                 </div>
                 <div class="form-outline mb-4">
                     <label class="form-label" for="loginPassword">Nome</label>
-                    <input type="text" id="loginPassword" class="form-control" name="n_nome"/>
+                    <input type="text" id="loginPassword" class="form-control" name="n_nome" required>
                 </div>
                 <div class="form-outline mb-4">
                     <label class="form-label" for="loginPassword">CPF</label>
-                    <input type="text" id="loginPassword" class="form-control" name="n_cpf"/>
+                    <input type="text" id="loginPassword" class="form-control" name="n_cpf" required>
                 </div>
                 <div class="form-outline mb-4">
                     <label class="form-label" for="loginPassword">Telefone</label>
-                    <input type="text" id="loginPassword" class="form-control" name="n_tel"/>
+                    <input type="text" id="loginPassword" class="form-control" name="n_tel" required>
                 </div>
                 <div class="form-outline mb-4">
                     <label class="form-label" for="loginPassword">Senha</label>
-                    <input type="password" class="form-control" name="n_senha"/>
+                    <input type="password" class="form-control" name="n_senha" required>
                 </div>
                 <div class="form-outline mb-4">
                     <label class="form-label" for="loginPassword">Repita a senha</label>
-                    <input type="password" class="form-control" name="n_rep_senha"/>
+                    <input type="password" class="form-control" name="n_rep_senha" required>
                 </div>
-                <button type="submit" class="btn btn-primary btn-block mb-4">Continuar</button>
+                <button type="submit" id="confirm_button" class="btn btn-primary btn-block mb-4">Continuar</button>
             </div>
         </div>
     </form>
@@ -109,8 +125,10 @@
         function validatePassword(){
         if(password.value != confirm_password.value) {
             confirm_password.setCustomValidity("Senhas diferentes!");
+            document.getElementById("btn").disabled = true;
         } else {
             confirm_password.setCustomValidity('');
+            document.getElementById("btn").disabled = false;
         }
         }
 
