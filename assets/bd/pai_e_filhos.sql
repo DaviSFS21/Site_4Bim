@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 04-Out-2022 às 03:07
+-- Tempo de geração: 06-Out-2022 às 02:56
 -- Versão do servidor: 10.4.24-MariaDB
 -- versão do PHP: 8.1.6
 
@@ -66,6 +66,7 @@ CREATE TABLE `usuario` (
 --
 
 INSERT INTO `usuario` (`cpf`, `admin`, `email`, `nome`, `senha`, `tel`) VALUES
+(8, 0, 'matheus08@email.com', 'Matheus Schiavão', '5ec0660a4dcecb1b6ff4ca1a1d48ca532deae433', 1208),
 (21, 1, 'davi21@email.com', 'Davi Soares', '24a33963e322e89d7dbc4ad6011769adbcfe43a7', 129);
 
 --

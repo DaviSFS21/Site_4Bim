@@ -19,23 +19,23 @@
         $numero_resultado = mysqli_num_rows($resultado_usuario);
 
         if($numero_resultado == 0){
-            $vetor_user = mysqli_fetch_array($resultado_usuario);            
-            if($email != $vetor_user[2]){
-                session_start();
 
-                $_SESSION['nome'] = $vetor_user[3];
-                $_SESSION['senha'] = $vetor_user[4];
-                $_SESSION['verif_admin'] = $vetor_user[1];
+            session_start();
 
-                ?>
-                    <script>
-                        alert("Login com sucesso!");
-                        window.location.replace("acesso_restrito.php");
-                    </script>
-                <?php
-            }
+            $_SESSION['nome'] = $nome;
+            $_SESSION['email'] = $email;
 
-            $sql_cadastrar = "INSERT INTO `usuario`(`cpf`, `email`, `nome`, `senha`, `tel`) VALUES ('$cpf','$email','$nome','$cripto','$tel')";
+            ?>
+                <script>
+                    alert("Cadastrado com sucesso!");
+                    window.location.replace("acesso_restrito.php");
+                </script>
+            <?php
+
+            $sql_cadastrar = "INSERT INTO `usuario`(`cpf`, `email`, `nome`, `senha`, `tel`) 
+            VALUES ('$cpf','$email','$nome','$cripto','$tel')";
+
+            mysqli_query($conexao, $sql_cadastrar);
         }else{
         ?>
             <script>
@@ -84,6 +84,10 @@
                 <div class="form-outline mb-4">
                     <label class="form-label" for="loginPassword">CPF</label>
                     <input type="text" id="loginPassword" class="form-control" name="n_cpf"/>
+                </div>
+                <div class="form-outline mb-4">
+                    <label class="form-label" for="loginPassword">Telefone</label>
+                    <input type="text" id="loginPassword" class="form-control" name="n_tel"/>
                 </div>
                 <div class="form-outline mb-4">
                     <label class="form-label" for="loginPassword">Senha</label>
