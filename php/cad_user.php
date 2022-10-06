@@ -118,22 +118,5 @@
         </div>
     </form>
 
-    <script>
-        var password = document.getElementById("n_senha")
-        , confirm_password = document.getElementById("n_rep_senha");
-
-        function validatePassword(){
-        if(password.value != confirm_password.value) {
-            confirm_password.setCustomValidity("Senhas diferentes!");
-            document.getElementById("btn").disabled = true;
-        } else {
-            confirm_password.setCustomValidity('');
-            document.getElementById("btn").disabled = false;
-        }
-        }
-
-        password.onchange = validatePassword;
-        confirm_password.onkeyup = validatePassword;
-    </script>
 </body>
 </html>
