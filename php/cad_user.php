@@ -32,6 +32,7 @@
             session_start();
             $_SESSION['nome'] = $nome;
             $_SESSION['email'] = $email;
+            $_S
 
             ?>
                 <script>
@@ -90,27 +91,27 @@
                 <p class="text-center">Insira o usuário do administrador:</p>
 
                 <div class="form-outline mb-4">
-                    <label class="form-label" for="loginName">Email</label>
-                    <input type="text" id="loginName" class="form-control" name="n_email" required>
+                    <label class="form-label">Email</label>
+                    <input type="text" class="form-control" name="n_email" required>
                 </div>
                 <div class="form-outline mb-4">
-                    <label class="form-label" for="loginPassword">Nome</label>
-                    <input type="text" id="loginPassword" class="form-control" name="n_nome" required>
+                    <label class="form-label">Nome</label>
+                    <input type="text" class="form-control" name="n_nome" required>
                 </div>
                 <div class="form-outline mb-4">
-                    <label class="form-label" for="loginPassword">CPF</label>
-                    <input type="text" id="loginPassword" class="form-control" name="n_cpf" required>
+                    <label class="form-label">CPF</label>
+                    <input type="text" class="form-control" onkeypress="$(this).mask('000.000.000-00');" maxlength="15" name="n_cpf" required>
                 </div>
                 <div class="form-outline mb-4">
-                    <label class="form-label" for="loginPassword">Telefone</label>
-                    <input type="text" id="loginPassword" class="form-control" name="n_tel" required>
+                    <label class="form-label">Telefone</label>
+                    <input type="text" class="form-control" onkeypress="$(this).mask('(00) 00000-0000');" maxlength="15" name="n_tel" required>
                 </div>
                 <div class="form-outline mb-4">
-                    <label class="form-label" for="loginPassword">Senha</label>
+                    <label class="form-label">Senha</label>
                     <input type="password" class="form-control" name="n_senha" required>
                 </div>
                 <div class="form-outline mb-4">
-                    <label class="form-label" for="loginPassword">Repita a senha</label>
+                    <label class="form-label">Repita a senha</label>
                     <input type="password" class="form-control" name="n_rep_senha" required>
                 </div>
                 <button type="submit" id="confirm_button" class="btn btn-primary btn-block mb-4">Continuar</button>
@@ -118,5 +119,10 @@
         </div>
     </form>
 
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.15/jquery.mask.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.15/jquery.mask.min.js"></script>
 </body>
 </html>

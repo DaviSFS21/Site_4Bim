@@ -1,5 +1,7 @@
 <?php
+    session_start();
 
+    if(!isset($_SESSION['email']))
     if(isset($_POST['c_email'])){
         $email = $_POST['c_email'];
         $senha = $_POST['c_senha'];
@@ -18,10 +20,9 @@
         if($numero_resultado == 1){
             $vetor_user = mysqli_fetch_array($resultado_usuario);            
             if($email = $vetor_user[2]){
-                session_start();
 
                 $_SESSION['nome'] = $vetor_user[3];
-                $_SESSION['senha'] = $vetor_user[4];
+                $_SESSION['email'] = $vetor_user[2];
                 $_SESSION['verif_admin'] = $vetor_user[1];
 
                 ?>
