@@ -1,3 +1,17 @@
 .container{
     padding: 5% 20%;
 }
+
+.alerta {
+    padding: 10px;
+    border: 1px solid gray;
+    border-radius: 3px;
+    margin: 10px;
+    margin-right: 300px;
+}
+
+.error {
+    border-color: #e8273b;
+    color: #FFF;
+    background-color: #ed5565;
+}

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 07-Out-2022 às 13:35
+-- Tempo de geração: 11-Out-2022 às 17:00
 -- Versão do servidor: 10.4.22-MariaDB
 -- versão do PHP: 8.1.1
 
@@ -54,12 +54,12 @@ INSERT INTO `produto` (`cod_prod`, `nome_prod`, `desc_prod`, `marca`, `path_img`
 --
 
 CREATE TABLE `usuario` (
-  `cpf` int(11) NOT NULL,
+  `cpf` varchar(14) NOT NULL,
   `admin` tinyint(1) NOT NULL,
   `email` varchar(60) NOT NULL,
   `nome` varchar(60) NOT NULL,
   `senha` varchar(100) NOT NULL,
-  `tel` int(14) NOT NULL
+  `tel` varchar(18) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
@@ -67,11 +67,11 @@ CREATE TABLE `usuario` (
 --
 
 INSERT INTO `usuario` (`cpf`, `admin`, `email`, `nome`, `senha`, `tel`) VALUES
-(7, 0, 'nicole07@email.com', 'Nicole Braz', '5a6f06db0bd8a8c95c41e825df3de1588c7569ed', 127),
-(8, 1, 'matheus08@email.com', 'Matheus Schiavão', '5ec0660a4dcecb1b6ff4ca1a1d48ca532deae433', 128),
-(21, 1, 'davi21@email.com', 'Davi Soares', '24a33963e322e89d7dbc4ad6011769adbcfe43a7', 129),
-(211, 1, 'varella21@email.com', 'Gustavo Varella', '40a2515249febef1b455ee603b0c08ba0b984c5b', 121),
-(111111, 0, 'erik@email.com', 'Erik Felipe', '813221ca5f14cb8312a6a48ff433c41b2cbb2877', 0);
+('123.456.789-07', 0, 'nicole07@email.com', 'Nicole Braz', '5a6f06db0bd8a8c95c41e825df3de1588c7569ed', '(12) 99963-2322'),
+('123.456.789-08', 1, 'matheus08@email.com', 'Matheus Schiavão', '5ec0660a4dcecb1b6ff4ca1a1d48ca532deae433', '(12) 99568-9438'),
+('123.456.789-10', 1, 'varella21@email.com', 'Gustavo Varella', '40a2515249febef1b455ee603b0c08ba0b984c5b', '(12) 99123-6742'),
+('123.456.789-21', 1, 'davi21@email.com', 'Davi Soares', '24a33963e322e89d7dbc4ad6011769adbcfe43a7', '(12) 99857-3352'),
+('123.456.789-97', 0, 'erik@email.com', 'Erik Felipe', '813221ca5f14cb8312a6a48ff433c41b2cbb2877', '(12) 99564-2938');
 
 --
 -- Índices para tabelas despejadas

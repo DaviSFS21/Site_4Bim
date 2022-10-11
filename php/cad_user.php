@@ -25,15 +25,21 @@
         //tranformando em numero o resultado da pesquisa
         $verif_cpf = mysqli_num_rows($result_cpf);
 
+        //SQL de pesquisa de Telefone
+        $sql_pesq_tel = "select * from `usuario` where `tel` = '$tel'";
+        $result_tel = mysqli_query($conexao,$sql_pesq_tel);
+        
+        //tranformando em numero o resultado da pesquisa
+        $verif_tel = mysqli_num_rows($result_tel);
+
         //Se não houver dados iguais, realizar o cadastro
-        if($verif_email == 0 && $verif_cpf == 0){
+        if($verif_email == 0 && $verif_cpf == 0 && $verif_tel == 0){
 
             //Iniciando a session com os dados inseridos
             session_start();
             $_SESSION['nome'] = $nome;
             $_SESSION['email'] = $email;
-            $_S
-
+ 
             ?>
                 <script>
                     alert("Cadastrado com sucesso!");
@@ -49,15 +55,12 @@
         }
         //Caso já existam registros inseridos, criar condicionais para mostrar o que foi repetido
         else{
-            if($verif_cpf == 1) $valor_rep = "CPF já cadastrado...";
-            if($verif_email == 1){
-                if ($valor_rep) $valor_rep = "CPF e ";
-                $valor_rep = $valor_rep . "Email já cadastrado...";
-            }
+            if($verif_cpf == 1) $valor_rep = "CPF; ";
+            if($verif_email == 1) $valor_rep = $valor_rep . "Email; ";
+            if($verif_tel == 1) $valor_rep = $valor_rep . "Telefone; ";
             ?>
                 <script>
-                    alert("<?php echo $valor_rep; ?>");
-                    window.location.replace("cad_user.php");
+                    alert("Já cadastrados: <?php echo trim($valor_rep,"; "); ?>");
                 </script>
             <?php
         }
@@ -89,7 +92,9 @@
             </ul>
             <div class="tab-content">
                 <p class="text-center">Insira o usuário do administrador:</p>
-
+                <?php if(isset($valor_rep)) 
+                echo '<div class="alerta error"><i class="fas fa-exclamation-circle" style="margin-right: 10px;">
+                    </i>CPF, Email, ou Telefone inválidos</div>'; ?>
                 <div class="form-outline mb-4">
                     <label class="form-label">Email</label>
                     <input type="text" class="form-control" name="n_email" required>
@@ -123,6 +128,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.15/jquery.mask.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.15/jquery.mask.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.15/jquery.mask.min.js"></script>]
+    <script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
 </body>
 </html>
