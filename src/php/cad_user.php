@@ -113,11 +113,11 @@
                 </div>
                 <div class="form-outline mb-4">
                     <label class="form-label">Senha</label>
-                    <input type="password" class="form-control" name="n_senha" required>
+                    <input type="password" oninput="check_senha()" class="form-control" id="n_senha" minlength=8 required>
                 </div>
                 <div class="form-outline mb-4">
                     <label class="form-label">Repita a senha</label>
-                    <input type="password" class="form-control" name="n_rep_senha" required>
+                    <input type="password" oninput="check_senha()" class="form-control" id="n_rep_senha" minlength=8 required>
                 </div>
                 <button type="submit" id="confirm_button" class="btn btn-primary btn-block mb-4">Continuar</button>
             </div>
@@ -128,7 +128,8 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.15/jquery.mask.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.15/jquery.mask.min.js"></script>]
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.15/jquery.mask.min.js"></script>
     <script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
+    <script src="../js/confirm_senha.js" text="text/javascript"></script>
 </body>
 </html>
