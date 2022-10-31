@@ -1,5 +1,26 @@
 <?php
     session_start();
+
+    if(isset($_SESSION['verif_admin'])){
+        if($_SESSION['verif_admin'] != 0){
+            echo "<h1>Sim</h1>";
+        }else{
+            ?>
+            <script>
+                alert("Você não deveria estar aqui...");
+                window.location.replace("./login.php");
+            </script>
+            <?php
+        }
+    }else{
+        ?>
+        <script>
+            alert("Faça o login primeiro, seu arrombado!");
+            window.location.replace("./login.php");
+        </script>
+        <?php
+    }
+    
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">
